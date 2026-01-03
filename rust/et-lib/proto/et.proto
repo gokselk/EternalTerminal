@@ -1,0 +1,41 @@
+syntax = "proto3";
+package et;
+
+enum EtPacketType {
+  ET_PACKET_TYPE_UNSPECIFIED = 0;
+  // Count down from 254 to avoid collisions
+  HEARTBEAT = 254;
+  INITIAL_PAYLOAD = 253;
+  INITIAL_RESPONSE = 252;
+}
+
+message ConnectRequest {
+  string client_id = 1;
+  int32 version = 2;
+}
+
+enum ConnectStatus {
+  CONNECT_STATUS_UNSPECIFIED = 0;
+  NEW_CLIENT = 1;
+  RETURNING_CLIENT = 2;
+  INVALID_KEY = 3;
+  MISMATCHED_PROTOCOL = 4;
+}
+
+message ConnectResponse {
+  ConnectStatus status = 1;
+  string error = 2;
+}
+
+message SequenceHeader {
+  int32 sequence_number = 1;
+}
+
+message CatchupBuffer {
+  repeated bytes buffer = 1;
+}
+
+message SocketEndpoint {
+  string name = 1;
+  int32 port = 2;
+}

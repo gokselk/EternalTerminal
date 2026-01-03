@@ -1,0 +1,34 @@
+[package]
+name = "et-server"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Eternal Terminal server"
+
+[[bin]]
+name = "etserver"
+path = "src/main.rs"
+
+[[bin]]
+name = "etterminal"
+path = "src/terminal_main.rs"
+
+[dependencies]
+et-lib = { path = "../et-lib" }
+et-terminal = { path = "../et-terminal" }
+tokio = { workspace = true }
+futures = { workspace = true }
+clap = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+nix = { workspace = true }
+libc = { workspace = true }
+parking_lot = "0.12"
+rand = "0.8"
+configparser = { workspace = true }
+uuid = { workspace = true }
+base64 = { workspace = true }
+ctrlc = "3.4"
+prost = { workspace = true }

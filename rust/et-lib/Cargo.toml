@@ -1,0 +1,27 @@
+[package]
+name = "et-lib"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Core library for Eternal Terminal"
+
+[dependencies]
+tokio = { workspace = true }
+futures = { workspace = true }
+socket2 = { workspace = true }
+sodiumoxide = { workspace = true }
+prost = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+base64 = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+uuid = { workspace = true }
+nix = { workspace = true }
+libc = { workspace = true }
+bytes = "1.5"
+parking_lot = "0.12"
+
+[build-dependencies]
+prost-build = { workspace = true }

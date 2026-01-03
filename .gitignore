@@ -67,3 +67,4 @@ GTAGS
 *.exe
 *.out
 *.app
+rust/target

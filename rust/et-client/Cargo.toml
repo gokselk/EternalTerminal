@@ -1,0 +1,26 @@
+[package]
+name = "et-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Eternal Terminal client"
+
+[[bin]]
+name = "et"
+path = "src/main.rs"
+
+[dependencies]
+et-lib = { path = "../et-lib" }
+et-terminal = { path = "../et-terminal" }
+tokio = { workspace = true }
+futures = { workspace = true }
+clap = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+nix = { workspace = true }
+libc = { workspace = true }
+parking_lot = "0.12"
+rand = "0.8"
+prost = { workspace = true }

@@ -1,0 +1,88 @@
+syntax = "proto3";
+package et;
+
+import "et.proto";
+
+enum TerminalPacketType {
+  // Proto3 requires first enum value to be 0
+  // KEEP_ALIVE is 0 in C++ version, so we use it as the default
+  KEEP_ALIVE = 0;
+  TERMINAL_BUFFER = 1;
+  TERMINAL_INFO = 2;
+  // Values 3-4 reserved for future use
+  PORT_FORWARD_DESTINATION_REQUEST = 5;
+  PORT_FORWARD_DESTINATION_RESPONSE = 6;
+  PORT_FORWARD_DATA = 7;
+  TERMINAL_USER_INFO = 8;
+  TERMINAL_INIT = 9;
+  JUMPHOST_INIT = 10;
+}
+
+message TerminalBuffer {
+  bytes buffer = 1;
+}
+
+message TerminalInfo {
+  string id = 1;
+  int32 row = 2;
+  int32 column = 3;
+  int32 width = 4;
+  int32 height = 5;
+}
+
+message PortForwardSourceRequest {
+  SocketEndpoint source = 1;
+  SocketEndpoint destination = 2;
+  string environment_variable = 3;
+}
+
+message PortForwardSourceResponse {
+  string error = 1;
+}
+
+message PortForwardDestinationRequest {
+  SocketEndpoint destination = 1;
+  int32 fd = 2;
+}
+
+message PortForwardDestinationResponse {
+  int32 client_fd = 1;
+  int32 socket_id = 2;
+  string error = 3;
+}
+
+message PortForwardData {
+  bool source_to_destination = 1;
+  int32 socket_id = 2;
+  bytes buffer = 3;
+  string error = 4;
+  bool closed = 5;
+}
+
+message InitialPayload {
+  bool jumphost = 1;
+  repeated PortForwardSourceRequest reverse_tunnels = 2;
+  map<string, string> environment_variables = 3;
+}
+
+message InitialResponse {
+  string error = 1;
+}
+
+message ConfigParams {
+  int32 vlevel = 1;
+  int32 min_log_level = 2;
+}
+
+message TermInit {
+  repeated string environment_names = 1;
+  repeated string environment_values = 2;
+}
+
+message TerminalUserInfo {
+  string id = 1;
+  string passkey = 2;
+  int64 uid = 3;
+  int64 gid = 4;
+  int64 fd = 5;
+}
